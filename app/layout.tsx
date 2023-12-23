@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-gray-50 text-gray-950 relative min-h-screen`}
+        className={`${inter.className} bg-gray-50 text-gray-950 relative min-h-screen sm:pt-36 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}
       >
         <ActiveSectionContextProvider>
           <Header />
