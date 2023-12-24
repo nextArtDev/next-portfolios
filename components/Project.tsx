@@ -1,29 +1,38 @@
-# CSS notes 
+'use client'
 
-## Z Index just works on 'relative'
+import { useRef } from 'react'
+import { projectsData } from '@/lib/data'
+import Image from 'next/image'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
-We make header relative to use z-index in it
-```JS
-<header className="z-[999] relative">
-```
+type ProjectProps = (typeof projectsData)[number]
 
-## How to push all the elements to up or down
+export default function Project({
+  title,
+  description,
+  tags,
+  imageUrl,
+}: ProjectProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    // start: 0:bottom of the viewport - riches the:- 1: top of the target
+    // end: 1.33:bottom of the viewport gone 33% - beyonds the project - 1: whole of the project
+    offset: ['0 1', '1.33 1'],
+  })
+  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1])
+  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1])
 
-by using _mt-auto_ we can push all the footer elements of the card to the bottom of that. (we should set h-full or terminate the height too)
-
-## tailwind even and odd pseudo classes
-
-```typescript
-return (
+  return (
+    // useRef does not know HTMLSectionElement! we use div and __smooth__ it!
     <motion.div
       ref={ref}
       style={{
-        scale: scaleProgess,
-        opacity: opacityProgess,
+        scale: scaleProgress,
+        opacity: opacityProgress,
       }}
       className="group mb-3 sm:mb-8 last:mb-0"
     >
-    // after defining one of the group as an even or odd, we should add m or p to push other group element to a side. i.e group-even:ml-[18rem]
       <section className="bg-gray-100 max-w-[42rem] border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-[20rem] hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
         <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full sm:group-even:ml-[18rem]">
           <h3 className="text-2xl font-semibold">{title}</h3>
@@ -41,7 +50,7 @@ return (
             ))}
           </ul>
         </div>
-// Image is always the second child of section, so section element should be even not image itself: group-even:right 
+
         <Image
           src={imageUrl}
           alt="Project I worked on"
@@ -62,4 +71,5 @@ return (
         />
       </section>
     </motion.div>
-```
+  )
+}

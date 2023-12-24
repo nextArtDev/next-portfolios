@@ -17,3 +17,21 @@ priority load the image as fast as possible, for main images
               className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
             />
 ```
+
+## Type of array of objects
+
+When we have array of objects we can just take the first one and lets typescript to infer the type and write number for each element of array
+
+```typescript
+type ProjectProps = (typeof projectsData)[number]
+
+export default function Project({
+  title,
+  description,
+  tags,
+  imageUrl,
+}: ProjectProps) {
+  //..
+}
+
+```
