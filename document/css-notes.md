@@ -63,3 +63,27 @@ return (
       </section>
     </motion.div>
 ```
+
+## Getting offset for scroll position of a section
+
+we get that by: _scroll-mt-28_
+
+```typescript
+    <motion.section
+      ref={ref}
+      // scroll-mt-28 adding offset to the top, when we scroll
+      className="mb-28 max-w-[45rem] text-center leading-8 sm:mb-40 scroll-mt-28"
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.175 }}
+      id="about"
+    >
+```
+
+## smooth scroll
+
+we put it in the html tag in layout
+
+```typescript
+ <html lang="en" className="!scroll-smooth">
+```
