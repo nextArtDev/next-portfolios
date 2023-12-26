@@ -87,3 +87,8 @@ we put it in the html tag in layout
 ```typescript
  <html lang="en" className="!scroll-smooth">
 ```
+
+## w-[min(100%,38rem)]
+
+defining min width for small screen and max-width for others.
+second value is the fixed value (maximum) and the first value is for width smaller than it. i.e. in big screens its 38rem and if screen is smaller than 38rem, it would be 100%.

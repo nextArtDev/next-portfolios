@@ -35,3 +35,21 @@ export default function Project({
 }
 
 ```
+
+## How to send tsx from ts
+
+we can change .tsx extension to .tsx but better way is to:
+
+```typescript
+// ContactFormEmail is a typescript component
+react: React.createElement(ContactFormEmail, {
+        message: message,
+        senderEmail: senderEmail,
+      }),
+```
+
+and this is equivalent to: 
+
+```typescript
+<ContactFormEmail message={message} senderEmail={senderEmail}/>
+```
